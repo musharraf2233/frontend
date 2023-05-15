@@ -1,3 +1,88 @@
-.space-buttons {
-    flex: 1 1 auto;
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~animate.css/animate.min";
+
+/* @import "~bootstrap/dist/css/bootstrap.css."; */
+
+.main-nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+.mat-toolbar {
+  display: flex;
+  height: 6rem;
+  background-color: white;
+  padding: 5px;
+  justify-content: space-evenly;
+  align-items: center;
+  box-shadow: 0px 0px 5px purple;
+}
+.nav-container {
+  width: 70%;
+  display: flex;
+  /* position: relative; */
+  justify-content: center;
+  row-gap: 30px;
+  align-content: space-between;
+  /* background-color: aqua; */
+}
+/* .logo-img {
+  display: flex;
+  position: relative;
+  animation-name: example;
+  animation-duration: 4s;
+} */
+body {
+  background-color: aqua;
+}
+a:link,
+a:visited {
+  color: rgb(128, 128, 128);
+  /* opacity: 60%; */
+  font-size: large;
+  font-family: "Open Sans", sans-serif;
+  text-decoration: none;
+}
+a:hover,
+a:focus {
+  color: purple;
+  background-color: none;
+  /* font-size: 22px; */
+}
+.btn-success {
+  font-size: large;
+  background-color: purple;
+  color: whitesmoke;
+}
+.btn-danger {
+  font-size: large;
+  background-color: tomato;
+  color: whitesmoke;
+}
+.mat-icon,
+.mat-icon:link,
+.mat-icon:visited {
+  font-size: xx-large;
+  color: rgb(128, 128, 128);
+}
+.mat-icon:hover,
+.mat-icon:focus {
+  color: purple;
+  background-color: none;
+  cursor: pointer;
+}
+.side-container {
+  width: 100%;
+  height: 100vh;
+}
+.sidenav {
+  margin: 20px 10px;
+  width: 200px;
+  height: 100%;
+  background-color: aquamarine;
+}
+.side-content {
+  height: 100vh;
+  background-color: bisque;
 }

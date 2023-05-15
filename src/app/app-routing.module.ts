@@ -17,6 +17,7 @@ import { RegisterComponent } from "./register/register.component";
 import { ShowProductDetailsComponent } from "./show-product-details/show-product-details.component";
 import { UserComponent } from "./user/user.component";
 import { AuthGuard } from "./_auth/auth.guard";
+import { StoreComponent } from "./store/store.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -25,6 +26,29 @@ const routes: Routes = [
     component: AdminComponent,
     canActivate: [AuthGuard],
     data: { roles: ["Admin"] },
+    children: [
+      {
+        path: "addNewProduct",
+        component: AddNewProductComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Admin"] },
+        resolve: {
+          product: ProductResolveService,
+        },
+      },
+      {
+        path: "showProductDetails",
+        component: ShowProductDetailsComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Admin"] },
+      },
+      {
+        path: "orderInformation",
+        component: OrderDetailsComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Admin"] },
+      },
+    ],
   },
   {
     path: "user",
@@ -34,27 +58,7 @@ const routes: Routes = [
   },
   { path: "login", component: LoginComponent },
   { path: "forbidden", component: ForbiddenComponent },
-  {
-    path: "addNewProduct",
-    component: AddNewProductComponent,
-    canActivate: [AuthGuard],
-    data: { roles: ["Admin"] },
-    resolve: {
-      product: ProductResolveService,
-    },
-  },
-  {
-    path: "showProductDetails",
-    component: ShowProductDetailsComponent,
-    canActivate: [AuthGuard],
-    data: { roles: ["Admin"] },
-  },
-  {
-    path: "orderInformation",
-    component: OrderDetailsComponent,
-    canActivate: [AuthGuard],
-    data: { roles: ["Admin"] },
-  },
+
   {
     path: "productViewDetails",
     component: ProductViewDetailsComponent,
@@ -73,24 +77,28 @@ const routes: Routes = [
     path: "cart",
     component: CartComponent,
     canActivate: [AuthGuard],
-    data: { roles: ["User"] }
+    data: { roles: ["User"] },
   },
   {
-    path:"orderConfirm",
+    path: "orderConfirm",
     component: OrderConfirmationComponent,
     canActivate: [AuthGuard],
-    data: { roles: ["User"] }
+    data: { roles: ["User"] },
   },
   {
-    path:"myOrders",
+    path: "myOrders",
     component: MyOrdersComponent,
     canActivate: [AuthGuard],
-    data: { roles: ["User"] }
+    data: { roles: ["User"] },
   },
   {
     path: "register",
-    component: RegisterComponent
-  }
+    component: RegisterComponent,
+  },
+  {
+    path: "store",
+    component: StoreComponent,
+  },
 ];
 
 @NgModule({

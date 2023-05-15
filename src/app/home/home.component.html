@@ -1,43 +1,55 @@
-<div class="container mt-5">
+<div class="container mt-5 text-center w-100 h-100"></div>
+<div class="main-container">
+  <h3>Our Brands</h3>
+  <div class="carousel-container">
+    <carousel
+      [loop]="true"
+      [width]="1000"
+      [images]="image"
+      [arrowsOutside]="true"
+      [arrowsTheme]="'dark'"
+      [cellsToShow]="5"
+      [cellWidth]="200"
+      [height]="150"
+      [margin]="70"
+      [autoplay]="true"
+      [transitionDuration]="500"
+      [autoplayInterval]="3000"
+      [arrows]="false"
+      [transitionTimingFunction]="'ease-out'"
+    ></carousel>
+  </div>
 
-   <mat-form-field appearance="outline" class="w-100">
-      <mat-label>Search any product</mat-label>
-      <input matInput
-             #searchkeyword
-             (keyup)="searchByKeyword(searchkeyword.value)"
-             name="searchKey"
-             id="searchKey"
-             placeholder="Search any product">
-      <mat-hint>Search any product</mat-hint>
-  </mat-form-field>
-
-   <mat-grid-list cols="4" rowHeight="3:5" gutterSize="10">
-      <mat-grid-tile *ngFor="let p of productDetails">
-         <div class="row p-5">
-            <div class="image-container">
-               <img class="home-page-product-image" [src]="p.productImages[0].url" alt="">
-            </div>
-            <div class="mt-3">
-               <p><b>{{p.productName}}</b></p>
-            </div>
-            <div class="mt-2">
-               <p style="white-space: inherit; height: 40px; width: 288px; overflow: hidden; text-overflow: ellipsis;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos sed eaque molestias iste repudiandae in quos distinctio rem excepturi expedita incidunt, doloremque id sequi perferendis ipsum. Maxime ad iste eius.</p>
-            </div>
-            <div class="mt-2">
-              <b>Rs. {{p.productDiscountedPrice}}</b> &nbsp;  <b style="text-decoration: line-through;">{{p.productActualPrice}}</b>
-            </div>
-            <div class="mt-2">
-               <button type="button" mat-raised-button color="warn" (click)="showProductDetails(p.productId)">View Details</button>
-            </div>
-         </div>
-      </mat-grid-tile>
-    </mat-grid-list>
-
-    <div class="text-center mt-5" style="padding-bottom: 100px;" *ngIf="showLoadButton">
-      <button type="button" mat-raised-button color="primary" (click)="loadMoreProduct()"> Load more</button>
+  <div class="foot-container">
+    <div class="foot-image">
+      <img src="../../assets/images/men-perfume.jpg" alt="" />
+      <div class="foot-text">
+        <p>
+          Perfume For<br />
+          Men
+        </p>
+        <button class="btn btn-1">shop now</button>
+      </div>
     </div>
-
-    <div class="mt-5" >
-         
+    <div class="foot-image">
+      <img src="../../assets/images/women-perfume.jpg" alt="" />
+      <div class="foot-text">
+        <p>
+          Perfume For<br />
+          Women
+        </p>
+        <button class="btn btn-2">shop now</button>
+      </div>
     </div>
+    <div class="foot-image">
+      <img src="../../assets/images/unisex-perfume.jpg" alt="" />
+      <div class="foot-text">
+        <p>
+          Perfume For<br />
+          Unisex
+        </p>
+        <button class="btn btn-3">shop now</button>
+      </div>
+    </div>
+  </div>
 </div>

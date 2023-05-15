@@ -1,20 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital@1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@200&display=swap");
 mat-grid-tile {
-    border: 1px solid lightgray;
-    border-radius: 5px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
 }
 
 .image-container {
-    position: relative;
-    height: 300px;
+  position: relative;
+  height: 300px;
 }
 
 .home-page-product-image {
-    max-width: 90%;
-    max-height: 90%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
+  max-width: 90%;
+  max-height: 90%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+* {
+  font-family: "Roboto Condensed", sans-serif;
+}
+body {
+  position: relative;
+}
+.carousel-container {
+  position: relative;
+  margin-top: 20px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+.carousel-cells .carousel-cell img {
+  /* position: relative; */
+  object-fit: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.foot-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.foot-image {
+  background-color: black;
+  margin: 3px;
+}
+.foot-image img {
+  opacity: 0.5;
+  width: 350px;
+  height: 400px;
+  object-fit: cover;
+  /* margin: 5px; */
+}
+
+.main-container {
+  text-align: center;
+}
+.foot-image {
+  position: relative;
+}
+/* .foot-text {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+} */
+.foot-text p {
+  font-family: "Varela Round", sans-serif;
+  position: absolute;
+  left: 45px;
+  top: 150px;
+  font-size: 40px;
+  line-height: 43px;
+  color: aliceblue;
+  letter-spacing: 1px;
+}
+.foot-text button {
+  font-family: "Barlow Condensed", sans-serif;
+  width: 100px;
+  height: min-content;
+  padding: 0;
+  border: 0;
+  border: none;
+  border-color: none;
+  position: absolute;
+  font-size: x-large;
+  background-color: blueviolet;
+  color: aliceblue;
+  left: 45px;
+  top: 300px;
+  cursor: pointer;
+}
+.foot-text button:hover {
+  background-color: purple;
+  transition: step-start;
+  transition-duration: 2s;
+}
+.nav-container {
+  position: relative;
 }

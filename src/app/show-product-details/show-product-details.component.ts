@@ -1,30 +1,38 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
-import { ImageProcessingService } from '../image-processing.service';
-import { ShowProductImagesDialogComponent } from '../show-product-images-dialog/show-product-images-dialog.component';
-import { Product } from '../_model/product.model';
-import { ProductService } from '../_services/product.service';
+import { HttpErrorResponse } from "@angular/common/http";
+import { Component, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { Router } from "@angular/router";
+import { map } from "rxjs/operators";
+import { ImageProcessingService } from "../image-processing.service";
+import { ShowProductImagesDialogComponent } from "../show-product-images-dialog/show-product-images-dialog.component";
+import { Product } from "../_model/product.model";
+import { ProductService } from "../_services/product.service";
 
 @Component({
-  selector: 'app-show-product-details',
-  templateUrl: './show-product-details.component.html',
-  styleUrls: ['./show-product-details.component.css']
+  selector: "app-show-product-details",
+  templateUrl: "./show-product-details.component.html",
+  styleUrls: ["./show-product-details.component.css"],
 })
 export class ShowProductDetailsComponent implements OnInit {
-
   showLoadMoreProductButton = false;
   showTable = false;
   pageNumber: number = 0;
   productDetails: Product[] = [];
-  displayedColumns: string[] = ['Id', 'Product Name', 'description', 'Product Discounted Price', 'Product Actual Price', 'Actions'];
+  displayedColumns: string[] = [
+    "Id",
+    "Product Name",
+    "description",
+    "Product Discounted Price",
+    "Product Actual Price",
+    "Actions",
+  ];
 
-  constructor(private productService: ProductService,
+  constructor(
+    private productService: ProductService,
     public imagesDialog: MatDialog,
     private imageProcessingService: ImageProcessingService,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getAllProducts();
@@ -39,28 +47,34 @@ export class ShowProductDetailsComponent implements OnInit {
 
   public getAllProducts(searchKeyword: string = "") {
     this.showTable = false;
-    this.productService.getAllProducts(this.pageNumber, searchKeyword)
-    .pipe(
-      map((x: Product[], i) => x.map((product: Product) => this.imageProcessingService.createImages(product)))
-    )
-    .subscribe(
-      (resp: Product[]) => {
-        // console.log(resp);
-        resp.forEach(product => this.productDetails.push(product));
-        console.log('msg', this.productDetails);
-        this.showTable = true;
+    this.productService
+      .getAllProducts(this.pageNumber, searchKeyword)
+      .pipe(
+        map((x: Product[], i) =>
+          x.map((product: Product) =>
+            this.imageProcessingService.createImages(product)
+          )
+        )
+      )
+      .subscribe(
+        (resp: Product[]) => {
+          // console.log(resp);
+          resp.forEach((product) => this.productDetails.push(product));
+          console.log("msg", this.productDetails);
+          this.showTable = true;
 
-        if(resp.length == 12) {
-          this.showLoadMoreProductButton = true;
-        } else {
-          this.showLoadMoreProductButton = false;
+          if (resp.length == 12) {
+            this.showLoadMoreProductButton = true;
+          } else {
+            this.showLoadMoreProductButton = false;
+          }
+
+          // this.productDetails = resp;
+        },
+        (error: HttpErrorResponse) => {
+          console.log(error);
         }
-
-        // this.productDetails = resp;
-      }, (error: HttpErrorResponse) => {
-        console.log(error);
-      }
-    );
+      );
   }
 
   loadMoreProduct() {
@@ -73,7 +87,7 @@ export class ShowProductDetailsComponent implements OnInit {
       (resp) => {
         this.getAllProducts();
       },
-      (error:HttpErrorResponse) => {
+      (error: HttpErrorResponse) => {
         console.log(error);
       }
     );
@@ -83,14 +97,14 @@ export class ShowProductDetailsComponent implements OnInit {
     console.log(product);
     this.imagesDialog.open(ShowProductImagesDialogComponent, {
       data: {
-        images: product.productImages
+        images: product.productImages,
       },
-      height: '500px',
-      width: '800px'
+      height: "500px",
+      width: "800px",
     });
   }
 
   editProductDetails(productId) {
-    this.router.navigate(['/addNewProduct', {productId: productId}]);
+    this.router.navigate(["/addNewProduct", { productId: productId }]);
   }
 }

@@ -1,0 +1,15 @@
+.btn {
+  color: whitesmoke;
+  background-color: purple;
+}
+.btn:hover {
+  color: purple;
+  background-color: whitesmoke;
+  border-color: purple;
+}
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: purple !important;
+}
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: purple !important;
+}

@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<!-- <mat-toolbar color="primary">
   <span>
     E-Commerce Application
   </span>
@@ -19,4 +19,55 @@
   <button *ngIf="isAdmin()" mat-raised-button color="primary" routerLink="/addNewProduct">Add New Product</button>
   <button *ngIf="isAdmin()" mat-raised-button color="primary" routerLink="/showProductDetails">Show Product Details</button>
   <button *ngIf="isAdmin()" mat-raised-button color="primary" routerLink="/orderInformation">Order Information</button>
-</mat-toolbar>
+</mat-toolbar> -->
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+/>
+<header class="header">
+  <mat-toolbar>
+    <img
+      src="../../assets/images/top-bar/logo_1x2-150x75.png"
+      alt="logo"
+      class="animate__animated animate__fadeInDown"
+      style="height: 75px; width: 150px"
+    />
+    <div class="nav-container">
+      <nav class="main-nav">
+        <span><a routerLink="">Home</a></span>
+        <span><a routerLink="store">Store</a></span>
+        <span><a routerLink="men">Men</a></span>
+        <span><a routerLink="women">Women</a></span>
+        <span><a routerLink="Unisex">Unisex</a></span>
+        <span><a routerLink="Skincare">Skin Care</a></span>
+        <span><a routerLink="Giftset">Gift Set</a></span>
+        <span
+          ><a *ngIf="isLoggedIn() && isAdmin()" routerLink="/admin"
+            >Admin</a
+          ></span
+        >
+
+        <!-- <span><a routerLink="Account">Account</a></span> -->
+        <button
+          mat-button
+          *ngIf="!isLoggedIn()"
+          type="button"
+          class="btn btn-success"
+          routerLink="/login"
+        >
+          Login
+        </button>
+        <button
+          mat-button
+          *ngIf="isLoggedIn()"
+          type="button"
+          class="btn btn-danger"
+          (click)="logout()"
+        >
+          Logout
+        </button>
+      </nav>
+    </div>
+    <a><mat-icon aria-label="Example home icon">add_shopping_cart</mat-icon></a>
+  </mat-toolbar>
+</header>

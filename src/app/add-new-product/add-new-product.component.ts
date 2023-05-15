@@ -13,6 +13,11 @@ import { ProductService } from "../_services/product.service";
   styleUrls: ["./add-new-product.component.css"],
 })
 export class AddNewProductComponent implements OnInit {
+  foods: any[] = [
+    { value: "steak-0", viewValue: "Steak" },
+    { value: "pizza-1", viewValue: "Pizza" },
+    { value: "tacos-2", viewValue: "Tacos" },
+  ];
   isNewProduct = true;
 
   product: Product = {
@@ -31,9 +36,9 @@ export class AddNewProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.product = this.activatedRoute.snapshot.data['product'];
+    this.product = this.activatedRoute.snapshot.data["product"];
 
-    if(this.product && this.product.productId) {
+    if (this.product && this.product.productId) {
       this.isNewProduct = false;
     }
   }

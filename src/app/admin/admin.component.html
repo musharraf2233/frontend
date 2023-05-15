@@ -1,5 +1,13 @@
-<div class="container mt-5">
-    <div class="card text-center" style="color: green; padding: 20px;">
-        <h1>You are Admin</h1>
-    </div>
-</div>
+<!-- <div class="container mt-5">
+  <div class="card text-center" style="color: green; padding: 20px">
+    <h1>You are Admin</h1>
+  </div>
+</div> -->
+<mat-sidenav-container class="tp-container">
+  <mat-sidenav mode="side" opened>
+    <span><a routerLink="addNewProduct">Add Product</a></span>
+    <span><a routerLink="showProductDetails">Show Product</a></span>
+    <span><a routerLink="orderInformation">view Orders</a></span>
+  </mat-sidenav>
+  <mat-sidenav-content><router-outlet></router-outlet></mat-sidenav-content>
+</mat-sidenav-container>
