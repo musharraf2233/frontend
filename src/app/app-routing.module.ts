@@ -18,6 +18,11 @@ import { ShowProductDetailsComponent } from "./show-product-details/show-product
 import { UserComponent } from "./user/user.component";
 import { AuthGuard } from "./_auth/auth.guard";
 import { StoreComponent } from "./store/store.component";
+import { MenComponent } from "./men/men.component";
+import { WomenComponent } from "./women/women.component";
+import { UnisexComponent } from "./unisex/unisex.component";
+import { SkincareComponent } from "./skincare/skincare.component";
+import { AboutusComponent } from "./aboutus/aboutus.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -48,6 +53,11 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: { roles: ["Admin"] },
       },
+      {
+        path: "productViewDetails",
+        component: ProductViewDetailsComponent,
+        resolve: { product: ProductResolveService },
+      },
     ],
   },
   {
@@ -58,7 +68,6 @@ const routes: Routes = [
   },
   { path: "login", component: LoginComponent },
   { path: "forbidden", component: ForbiddenComponent },
-
   {
     path: "productViewDetails",
     component: ProductViewDetailsComponent,
@@ -95,10 +104,12 @@ const routes: Routes = [
     path: "register",
     component: RegisterComponent,
   },
-  {
-    path: "store",
-    component: StoreComponent,
-  },
+  { path: "men", component: MenComponent },
+  { path: "women", component: WomenComponent },
+  { path: "store", component: StoreComponent },
+  { path: "unisex", component: UnisexComponent },
+  { path: "skincare", component: SkincareComponent },
+  { path: "aboutus", component: AboutusComponent },
 ];
 
 @NgModule({

@@ -42,6 +42,17 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { StoreComponent } from "./store/store.component";
 import { NgbModule, NgbCarouselModule } from "@ng-bootstrap/ng-bootstrap";
 import { MatSelectModule } from "@angular/material/select";
+import { MenComponent } from "./men/men.component";
+import { WomenComponent } from "./women/women.component";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { LayoutModule } from "@angular/cdk/layout";
+import { MatMenuModule } from "@angular/material/menu";
+import { AboutusComponent } from "./aboutus/aboutus.component";
+import { UnisexComponent } from "./unisex/unisex.component";
+import { SkincareComponent } from "./skincare/skincare.component";
+import { MatTabsModule } from "@angular/material/tabs";
+import { BestsellerComponent } from "./bestseller/bestseller.component";
+import { CarouselModule } from "ngx-owl-carousel-o";
 
 @NgModule({
   declarations: [
@@ -65,6 +76,12 @@ import { MatSelectModule } from "@angular/material/select";
     OrderDetailsComponent,
     FooterComponent,
     StoreComponent,
+    MenComponent,
+    WomenComponent,
+    AboutusComponent,
+    UnisexComponent,
+    SkincareComponent,
+    BestsellerComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,6 +104,11 @@ import { MatSelectModule } from "@angular/material/select";
     NgbModule,
     NgbCarouselModule,
     MatSelectModule,
+    MatProgressBarModule,
+    LayoutModule,
+    MatMenuModule,
+    MatTabsModule,
+    CarouselModule,
   ],
   providers: [
     AuthGuard,
@@ -97,6 +119,8 @@ import { MatSelectModule } from "@angular/material/select";
     },
     UserService,
   ],
-  bootstrap: [AppComponent],
+  entryComponents: [ShowProductImagesDialogComponent],
+  bootstrap: [AppComponent, HomeComponent],
+  exports: [HomeComponent],
 })
 export class AppModule {}

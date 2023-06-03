@@ -1,0 +1,49 @@
+<div class="album py-5 bg-body-tertiary">
+  <div class="container">
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3">
+      <div class="col" *ngFor="let p of productDetails">
+        <div class="card shadow-sm">
+          <img
+            [src]="p.productImages[0].url"
+            class="card-img-top"
+            alt="{{ p.productName }} {{ ml }}"
+          />
+          <div class="card-body">
+            <div class="h-25">
+              <p
+                class="card-text"
+                style="
+                  white-space: inherit;
+                  height: 45px;
+                  width: 200px;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                "
+              >
+                {{ p.productDescription }}
+              </p>
+            </div>
+            <h6 class="card-title">{{ p.productName | uppercase }}</h6>
+            <p>
+              <b>&#8377; {{ p.productDiscountedPrice }}</b> &nbsp;
+              <b style="text-decoration: line-through"
+                >&#8377;{{ p.productActualPrice }}</b
+              >
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button
+                  type="button"
+                  mat-raised-button
+                  (click)="showProductDetails(p.productId)"
+                >
+                  View Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

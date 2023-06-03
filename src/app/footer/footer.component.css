@@ -1,19 +1,22 @@
 footer {
   margin-top: 20px;
-  height: 100vh;
+  height: max-content;
   background-color: purple;
-}
-footer .foot-container {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-
+}
+.foot-container {
+  width: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   padding-top: 40px;
 }
 .container {
   /* background-color: aqua; */
   width: 250px;
-  height: 350px;
+  height: max-content;
   padding: 0;
   margin: 10px;
 }
@@ -37,19 +40,21 @@ h4 {
 a {
   color: whitesmoke;
   font-size: large;
+  text-decoration: none;
 }
 ul li {
   padding: 5px 0;
+  color: whitesmoke;
 }
 .container-4 {
   color: whitesmoke;
 }
 
-footer .copyright {
+.copyright {
   display: flex;
   padding: 40px;
   justify-content: space-between;
   position: relative;
-  top: 40px;
+  /* top: 40px; */
   background-color: darkgray;
 }

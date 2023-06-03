@@ -11,6 +11,7 @@ import { UserService } from "../_services/user.service";
   encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent implements OnInit {
+  hide = true;
   constructor(
     private userService: UserService,
     private userAuthService: UserAuthService,

@@ -13,16 +13,19 @@ import { ProductService } from "../_services/product.service";
   styleUrls: ["./add-new-product.component.css"],
 })
 export class AddNewProductComponent implements OnInit {
-  foods: any[] = [
-    { value: "steak-0", viewValue: "Steak" },
-    { value: "pizza-1", viewValue: "Pizza" },
-    { value: "tacos-2", viewValue: "Tacos" },
+  types: any[] = [
+    { value: "men", viewValue: "men" },
+    { value: "women", viewValue: "women" },
+    { value: "unisex", viewValue: "unisex" },
   ];
   isNewProduct = true;
 
   product: Product = {
     productId: null,
     productName: "",
+    type: "",
+    ml: 100,
+    bestSeller: false,
     productDescription: "",
     productDiscountedPrice: 0,
     productActualPrice: 0,

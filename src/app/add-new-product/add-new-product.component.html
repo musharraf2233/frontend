@@ -13,13 +13,22 @@
             />
           </mat-form-field>
 
-          <mat-form-field appearance="fill">
-            <mat-label>Favorite food</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let food of foods" [value]="food.value">
-                {{ food.viewValue }}
+          <mat-form-field appearance="outline" class="w-50">
+            <mat-label>Type</mat-label>
+            <mat-select name="type" [(ngModel)]="product.type">
+              <mat-option *ngFor="let type of types" [value]="type.value">
+                {{ type.viewValue }}
               </mat-option>
             </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-50">
+            <mat-label>Product ML</mat-label>
+            <input
+              matInput
+              placeholder="Product ML"
+              [(ngModel)]="product.ml"
+              name="productML"
+            />
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="w-100">

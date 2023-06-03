@@ -24,7 +24,8 @@
   href="https://fonts.googleapis.com/icon?family=Material+Icons"
   rel="stylesheet"
 />
-<header class="header">
+
+<header>
   <mat-toolbar>
     <img
       src="../../assets/images/top-bar/logo_1x2-150x75.png"
@@ -32,22 +33,46 @@
       class="animate__animated animate__fadeInDown"
       style="height: 75px; width: 150px"
     />
-    <div class="nav-container">
+
+    <div class="nav-container" *ngIf="isWebScreen | async">
       <nav class="main-nav">
-        <span><a routerLink="">Home</a></span>
-        <span><a routerLink="store">Store</a></span>
-        <span><a routerLink="men">Men</a></span>
-        <span><a routerLink="women">Women</a></span>
-        <span><a routerLink="Unisex">Unisex</a></span>
-        <span><a routerLink="Skincare">Skin Care</a></span>
-        <span><a routerLink="Giftset">Gift Set</a></span>
+        <span
+          ><a
+            [routerLinkActive]="'active'"
+            routerLink=""
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Home</a
+          ></span
+        >
+        <span
+          ><a [routerLinkActive]="'active'" routerLink="store">Store</a></span
+        >
+        <span
+          ><a [routerLinkActive]="'active'" routerLink="men" #unmonitored>
+            Men</a
+          ></span
+        >
+        <span
+          ><a [routerLinkActive]="'active'" routerLink="women">Women</a></span
+        >
+        <span
+          ><a [routerLinkActive]="'active'" routerLink="unisex">Unisex</a></span
+        >
+        <span
+          ><a [routerLinkActive]="'active'" routerLink="skincare"
+            >Skin Care</a
+          ></span
+        >
+        <span
+          ><a [routerLinkActive]="'active'" routerLink="aboutus"
+            >About Us</a
+          ></span
+        >
         <span
           ><a *ngIf="isLoggedIn() && isAdmin()" routerLink="/admin"
             >Admin</a
           ></span
         >
-
-        <!-- <span><a routerLink="Account">Account</a></span> -->
         <button
           mat-button
           *ngIf="!isLoggedIn()"
@@ -68,6 +93,35 @@
         </button>
       </nav>
     </div>
-    <a><mat-icon aria-label="Example home icon">add_shopping_cart</mat-icon></a>
+
+    <div class="icon">
+      <mat-icon><i routerLink="/cart" class="bi bi-cart-plus"></i></mat-icon>
+
+      <mat-icon
+        mat-icon
+        *ngIf="isMobScreen | async"
+        (click)="toggleNav(sidenav)"
+        ><i class="bi bi-list"></i
+      ></mat-icon>
+    </div>
   </mat-toolbar>
 </header>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="over" position="end">
+    <button routerLink="" class="btn w-100 mt-2 p-6 side-btn">
+      <i class="bi bi-house"></i> Home
+    </button>
+    <button routerLink="store" class="btn w-100 mt-2 p-6 side-btn">
+      <i class="bi bi-shop-window"></i> Store
+    </button>
+    <button routerLink="men" class="btn w-100 mt-2 p-6 side-btn">
+      <i class="bi bi-gender-male"></i> Men
+    </button>
+    <button routerLink="women" class="btn w-100 mt-2 p-6 side-btn">
+      <i class="bi bi-gender-female"></i> Women
+    </button>
+  </mat-sidenav>
+  <mat-sidenav-content
+    ><router-outlet (activate)="onActive()"></router-outlet
+  ></mat-sidenav-content>
+</mat-sidenav-container>

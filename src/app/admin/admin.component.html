@@ -5,9 +5,15 @@
 </div> -->
 <mat-sidenav-container class="tp-container">
   <mat-sidenav mode="side" opened>
-    <span><a routerLink="addNewProduct">Add Product</a></span>
-    <span><a routerLink="showProductDetails">Show Product</a></span>
-    <span><a routerLink="orderInformation">view Orders</a></span>
+    <button routerLink="addNewProduct">
+      Add Product<i class="bi bi-file-plus"></i>
+    </button>
+    <button routerLink="showProductDetails">
+      Show Product<i class="bi bi-view-list"></i>
+    </button>
+    <button routerLink="orderInformation">
+      view Orders<i class="bi bi-info-square"></i>
+    </button>
   </mat-sidenav>
   <mat-sidenav-content><router-outlet></router-outlet></mat-sidenav-content>
 </mat-sidenav-container>

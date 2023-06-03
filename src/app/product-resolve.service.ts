@@ -1,17 +1,23 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { Product } from './_model/product.model';
-import { ProductService } from './_services/product.service';
-import { ImageProcessingService } from './image-processing.service'
-import { map } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import {
+  ActivatedRouteSnapshot,
+  Resolve,
+  RouterStateSnapshot,
+} from "@angular/router";
+import { Observable, of } from "rxjs";
+import { Product } from "./_model/product.model";
+import { ProductService } from "./_services/product.service";
+import { ImageProcessingService } from "./image-processing.service";
+import { map } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root",
 })
 export class ProductResolveService implements Resolve<Product> {
-  constructor(private productService: ProductService,
-    private imageProcessingService: ImageProcessingService) {}
+  constructor(
+    private productService: ProductService,
+    private imageProcessingService: ImageProcessingService
+  ) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
@@ -21,10 +27,9 @@ export class ProductResolveService implements Resolve<Product> {
 
     if (id) {
       //then we have to fetch details from backend
-       return this.productService.getProductDetailsById(id)
-              .pipe(
-                map(p => this.imageProcessingService.createImages(p))
-              );
+      return this.productService
+        .getProductDetailsById(id)
+        .pipe(map((p) => this.imageProcessingService.createImages(p)));
     } else {
       // return empty product observable.
       return of(this.getProductDetails());
@@ -33,8 +38,11 @@ export class ProductResolveService implements Resolve<Product> {
 
   getProductDetails() {
     return {
-      productId:null,
+      productId: null,
       productName: "",
+      type: "",
+      ml: 0,
+      bestSeller: null,
       productDescription: "",
       productDiscountedPrice: 0,
       productActualPrice: 0,

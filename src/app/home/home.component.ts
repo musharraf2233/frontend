@@ -1,18 +1,26 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { map } from "rxjs/operators";
 import { ImageProcessingService } from "../image-processing.service";
 import { Product } from "../_model/product.model";
 import { ProductService } from "../_services/product.service";
+import {
+  BreakpointObserver,
+  Breakpoints,
+  MediaMatcher,
+} from "@angular/cdk/layout";
+import { Observable, Subject, observable } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+import { OwlOptions } from "ngx-owl-carousel-o";
 
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.css"],
 })
-export class HomeComponent implements OnInit {
-  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
+export class HomeComponent implements OnInit, OnDestroy {
+  // images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
 
   pageNumber: number = 0;
 
@@ -20,14 +28,84 @@ export class HomeComponent implements OnInit {
 
   showLoadButton = false;
 
+  isWideScreen: Observable<boolean>;
+
+  carouselSize: number;
+  CarouselWidth: number;
+  carouselheight: number;
+  carouselMargin: number;
+  cells: number;
+  destroyed = new Subject<void>();
+  currentScreenSize: string;
+  displayNameMap = new Map([
+    [Breakpoints.XSmall, "XSmall"],
+    [Breakpoints.Small, "Small"],
+    [Breakpoints.Medium, "Medium"],
+    [Breakpoints.Large, "Large"],
+    [Breakpoints.XLarge, "XLarge"],
+  ]);
+
   constructor(
     private productService: ProductService,
     private imageProcessingService: ImageProcessingService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private breakpointObserver: BreakpointObserver
+  ) {
+    breakpointObserver
+      .observe([
+        Breakpoints.XSmall,
+        Breakpoints.Small,
+        Breakpoints.Medium,
+        Breakpoints.Large,
+        Breakpoints.XLarge,
+      ])
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((result) => {
+        for (const query of Object.keys(result.breakpoints)) {
+          if (result.breakpoints[query]) {
+            console.log(result);
+
+            if (
+              this.breakpointObserver.isMatched(Breakpoints.Large) ||
+              this.breakpointObserver.isMatched(Breakpoints.Medium)
+            ) {
+              this.carouselSize = 1000;
+              this.CarouselWidth = 150;
+              this.carouselheight = 150;
+              this.carouselMargin = 65;
+              this.cells = 5;
+            }
+            if (this.breakpointObserver.isMatched(Breakpoints.Small)) {
+              this.carouselSize = 700;
+              this.CarouselWidth = 130;
+              this.carouselheight = 130;
+              this.carouselMargin = 60;
+              this.cells = 4;
+            }
+            if (this.breakpointObserver.isMatched(Breakpoints.XLarge)) {
+              this.carouselSize = 1000;
+              this.CarouselWidth = 150;
+              this.carouselheight = 150;
+              this.carouselMargin = 65;
+              this.cells = 5;
+            }
+            if (this.breakpointObserver.isMatched(Breakpoints.XSmall)) {
+              this.carouselSize = 470;
+              this.CarouselWidth = 110;
+              this.carouselheight = 110;
+              this.carouselMargin = 66;
+              this.cells = 3;
+            }
+          }
+        }
+      });
+  }
 
   ngOnInit(): void {
     this.getAllProducts();
+    this.isWideScreen = this.breakpointObserver
+      .observe(Breakpoints.Medium)
+      .pipe(map(({ matches }) => matches));
   }
 
   searchByKeyword(searchkeyword) {
@@ -93,4 +171,9 @@ export class HomeComponent implements OnInit {
     { path: "../../assets/images/carousel/2.jpg" },
     { path: "../../assets/images/carousel/2.jpg" },
   ];
+
+  ngOnDestroy() {
+    this.destroyed.next();
+    this.destroyed.complete();
+  }
 }

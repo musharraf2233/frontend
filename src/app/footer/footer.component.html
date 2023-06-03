@@ -1,6 +1,6 @@
 <footer>
-  <div class="foot-container">
-    <div class="container container-1">
+  <div class="foot-container row p-6">
+    <div class="container">
       <div class="foot-image">
         <img
           style="width: 240px; height: 120px"
@@ -15,13 +15,13 @@
         <a href=""><i class="bi bi-youtube"></i></a>
       </div>
     </div>
-    <div class="container container-2">
-      <h3>Quick Links</h3>
+    <div class="container">
+      <h4>Quick Links</h4>
       <ul>
-        <li><a href="">Home</a></li>
-        <li><a href="">About</a></li>
+        <li><a routerLink="">Home</a></li>
+        <li><a href="aboutus">About Us</a></li>
         <li><a href="">My Account</a></li>
-        <li><a href="">Cart</a></li>
+        <li><a href="cart">Cart</a></li>
         <li><a href="">Contact</a></li>
         <li><a href="">Delivery Details</a></li>
         <li><a href="">Privacy Policy</a></li>
@@ -29,19 +29,22 @@
         <li><a href="">Return Policy</a></li>
       </ul>
     </div>
-    <div class="container container-3">
-      <h3>Choose Your Perfume</h3>
+    <div class="container">
+      <h4>Choose Your Perfume</h4>
       <ul>
-        <li><a href="">Men</a></li>
-        <li><a href="">Women</a></li>
-        <li><a href="">Unisex</a></li>
+        <li><a routerLink="men">Men</a></li>
+        <li><a routerLink="women">Women</a></li>
+        <li><a routerLink="unisex">Unisex</a></li>
+        <li><a href="">Skin Care</a></li>
       </ul>
     </div>
-    <div class="container container-4">
+    <div class="container">
       <h4>Contact</h4>
       <address>
         <ul>
-          <li><i class="bi bi-geo-alt"></i> Theperfumestore,chennai</li>
+          <li>
+            <a><i class="bi bi-geo-alt"></i> Theperfumestore,chennai</a>
+          </li>
           <li>
             <i class="bi bi-telephone"></i
             ><a href="tel:++919790852233"> +91 9790852233</a>
@@ -49,10 +52,16 @@
         </ul>
       </address>
       <h4>Payment Secured By</h4>
+      <img
+        width="220px"
+        height="90px"
+        src="../../assets/images/razorpay.webp"
+        alt=""
+      />
     </div>
   </div>
-  <div class="copyright">
-    <h6>Copyright &nbsp;</h6>
-    <h6>musharraf</h6>
-  </div>
 </footer>
+<div class="copyright">
+  <h6>The Perfume Store<sup>&copy; </sup></h6>
+  <h6>musharraf</h6>
+</div>

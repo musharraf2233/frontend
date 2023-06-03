@@ -1,33 +1,101 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Product } from "../_model/product.model";
-import { map } from "rxjs/operators";
+import { map, takeUntil } from "rxjs/operators";
 import { ProductService } from "../_services/product.service";
 import { ImageProcessingService } from "../image-processing.service";
 import { Router } from "@angular/router";
+import {
+  BreakpointObserver,
+  BreakpointState,
+  Breakpoints,
+} from "@angular/cdk/layout";
+import { Observable, Subject } from "rxjs";
 
 @Component({
   selector: "app-store",
   templateUrl: "./store.component.html",
   styleUrls: ["./store.component.css"],
 })
-export class StoreComponent implements OnInit {
+export class StoreComponent implements OnInit, OnDestroy {
   pageNumber: number = 0;
 
   productDetails = [];
 
+  brands = [];
+
+  pages: Array<number>;
+
+  cols: string;
+  slide: string;
+  destroyed = new Subject<void>();
   showLoadButton = false;
+
+  colsMap = new Map([
+    [Breakpoints.XSmall, "2"],
+    [Breakpoints.Small, "2"],
+    [Breakpoints.Medium, "4"],
+    [Breakpoints.Large, "4"],
+    [Breakpoints.XLarge, "5"],
+  ]);
+
+  sideMap = new Map([
+    [Breakpoints.XSmall, "over"],
+    [Breakpoints.Small, "over"],
+    [Breakpoints.Medium, "side"],
+    [Breakpoints.Large, "side"],
+    [Breakpoints.XLarge, "side"],
+  ]);
+  isMobScreen: Observable<boolean>;
 
   constructor(
     private productService: ProductService,
     private imageProcessingService: ImageProcessingService,
-    private router: Router
-  ) {}
-
-  ngOnInit(): void {
-    this.getAllProducts();
+    private router: Router,
+    private breakpointObserver: BreakpointObserver
+  ) {
+    breakpointObserver
+      .observe([
+        Breakpoints.XSmall,
+        Breakpoints.Small,
+        Breakpoints.Medium,
+        Breakpoints.Large,
+        Breakpoints.XLarge,
+      ])
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((result) => {
+        for (const query of Object.keys(result.breakpoints)) {
+          if (result.breakpoints[query]) {
+            this.cols = this.colsMap.get(query);
+            this.slide = this.sideMap.get(query);
+          }
+        }
+      });
   }
 
+  setPage(i, event: any) {
+    event.preventDefault();
+    this.pages = i;
+    this.getAllProducts;
+  }
+
+  isHandset: Observable<BreakpointState> = this.breakpointObserver.observe(
+    Breakpoints.Handset
+  );
+  ngOnInit(): void {
+    this.getAllProducts();
+    this.getAllBrands();
+    this.isMobScreen = this.breakpointObserver
+      .observe([Breakpoints.Small, Breakpoints.XSmall])
+      .pipe(map(({ matches }) => matches));
+  }
+  toggleNav(nav: any) {
+    if (nav.opened) {
+      nav.close();
+    } else {
+      nav.open();
+    }
+  }
   searchByKeyword(searchkeyword) {
     console.log(searchkeyword);
     this.pageNumber = 0;
@@ -48,7 +116,9 @@ export class StoreComponent implements OnInit {
       .subscribe(
         (resp: Product[]) => {
           console.log(resp);
-          if (resp.length == 12) {
+          console.log(resp.length);
+
+          if (resp.length == 8) {
             this.showLoadButton = true;
           } else {
             this.showLoadButton = false;
@@ -68,5 +138,22 @@ export class StoreComponent implements OnInit {
 
   showProductDetails(productId) {
     this.router.navigate(["/productViewDetails", { productId: productId }]);
+  }
+
+  public getAllBrands() {
+    this.productService.getAllBrands().subscribe(
+      (res: Product[]) => {
+        console.log(res);
+
+        res.forEach((p) => this.brands.push(p));
+      },
+      (err: HttpErrorResponse) => {
+        console.log(err);
+      }
+    );
+  }
+  ngOnDestroy() {
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 }

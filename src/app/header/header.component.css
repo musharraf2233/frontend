@@ -11,20 +11,29 @@
 }
 .mat-toolbar {
   display: flex;
+  width: 100%;
   height: 6rem;
   background-color: white;
-  padding: 5px;
-  justify-content: space-evenly;
+  /* padding: 5px; */
   align-items: center;
+  align-content: center;
+  justify-content: space-between;
   box-shadow: 0px 0px 5px purple;
 }
+.icon {
+  display: flex;
+  justify-content: space-between;
+  width: 70px;
+  height: 36px;
+}
 .nav-container {
-  width: 70%;
+  width: 100%;
   display: flex;
   /* position: relative; */
   justify-content: center;
+  align-items: center;
   row-gap: 30px;
-  align-content: space-between;
+  /* align-content: space-between; */
   /* background-color: aqua; */
 }
 /* .logo-img {
@@ -61,13 +70,11 @@ a:focus {
   color: whitesmoke;
 }
 .mat-icon,
-.mat-icon:link,
-.mat-icon:visited {
+.mat-icon:link {
   font-size: xx-large;
   color: rgb(128, 128, 128);
 }
-.mat-icon:hover,
-.mat-icon:focus {
+.mat-icon:hover {
   color: purple;
   background-color: none;
   cursor: pointer;
@@ -85,4 +92,38 @@ a:focus {
 .side-content {
   height: 100vh;
   background-color: bisque;
+}
+.mat-progress-bar {
+  color: blueviolet;
+}
+header {
+  width: 100%;
+}
+.mat-drawer-container {
+  margin-top: 5px;
+  background-color: white;
+}
+
+mat-sidenav {
+  width: 200px;
+}
+.side-btn {
+  background-color: white;
+  color: rgb(128, 128, 128);
+}
+.side-btn:hover {
+  background-color: white;
+  color: purple;
+}
+a.active {
+  color: purple;
+}
+a > i {
+  display: flex;
+  justify-content: space-between;
+}
+mat-sidenav-container {
+  /* margin-top: 20px; */
+  height: auto;
+  background-color: aqua;
 }
