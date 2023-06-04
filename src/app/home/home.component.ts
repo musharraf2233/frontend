@@ -1,5 +1,11 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation,
+} from "@angular/core";
 import { Router } from "@angular/router";
 import { map } from "rxjs/operators";
 import { ImageProcessingService } from "../image-processing.service";
@@ -18,6 +24,7 @@ import { OwlOptions } from "ngx-owl-carousel-o";
   selector: "app-home",
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.css"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class HomeComponent implements OnInit, OnDestroy {
   // images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
@@ -165,13 +172,39 @@ export class HomeComponent implements OnInit, OnDestroy {
     { path: "../../assets/images/brand/12.png" },
   ];
 
-  mainCarousel = [
-    { path: "../../assets/images/carousel/2.jpg" },
-    { path: "../../assets/images/carousel/1.jpg" },
-    { path: "../../assets/images/carousel/2.jpg" },
-    { path: "../../assets/images/carousel/2.jpg" },
+  slides = [
+    { id: 1, img: "../../assets/images/carousel/2.jpg" },
+    { id: 2, img: "../../assets/images/carousel/1.jpg" },
+    { id: 3, img: "../../assets/images/carousel/2.jpg" },
+    { id: 4, img: "../../assets/images/carousel/1.jpg" },
+    { id: 5, img: "../../assets/images/carousel/2.jpg" },
+    { id: 6, img: "../../assets/images/carousel/1.jpg" },
+    { id: 6, img: "../../assets/images/carousel/2.jpg" },
   ];
-
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: false,
+    touchDrag: true,
+    pullDrag: false,
+    dots: false,
+    navSpeed: 1000,
+    stagePadding: 50,
+    autoplay: true,
+    autoplayTimeout: 8000,
+    autoplayHoverPause: true,
+    animateOut: "animate__animated animate__fadeOut",
+    animateIn: "animate__animated animate__fadeIn",
+    navText: [
+      '<i class="bi bi-caret-left-fill"></i>',
+      '<i class="bi bi-caret-right-fill"></i>',
+    ],
+    responsive: {
+      0: {
+        items: 1,
+      },
+    },
+    nav: true,
+  };
   ngOnDestroy() {
     this.destroyed.next();
     this.destroyed.complete();

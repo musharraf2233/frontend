@@ -108,3 +108,12 @@ body {
 .nav-container {
   position: relative;
 }
+.owl-nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.owl-prev:hover,
+.owl-next:hover {
+  background-color: blueviolet;
+}

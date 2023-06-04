@@ -1,6 +1,12 @@
-<owl-carousel-o>
-  
+<div>Some tags before</div>
+<owl-carousel-o [options]="customOptions">
+  <ng-container *ngFor="let slide of slides">
+    <ng-template carouselSlide [id]="slide.id">
+      <img [src]="slide.img" />
+    </ng-template>
+  </ng-container>
 </owl-carousel-o>
+<div>Some tags after</div>
 <div class="container mt-5 w-100 h-100">
   <mat-tab-group dynamicHeight mat-align-tabs="center">
     <mat-tab routerLink="men" label="First"

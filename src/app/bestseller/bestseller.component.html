@@ -1,7 +1,7 @@
 <div class="album py-5 bg-body-tertiary">
-  <div class="container">
+  <div class="container" *ngFor="let p of productDetails">
     <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3">
-      <div class="col" *ngFor="let p of productDetails">
+      <div class="col" *ngIf="p.bestseller">
         <div class="card shadow-sm">
           <img
             [src]="p.productImages[0].url"
