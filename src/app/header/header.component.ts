@@ -1,15 +1,17 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
 import { Router } from "@angular/router";
 import { UserAuthService } from "../_services/user-auth.service";
 import { UserService } from "../_services/user.service";
 import { Observable } from "rxjs";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { map } from "rxjs/operators";
+import { LoaderService } from "../loader.service";
 
 @Component({
   selector: "app-header",
   templateUrl: "./header.component.html",
   styleUrls: ["./header.component.css"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent implements OnInit {
   isWebScreen: Observable<boolean>;
@@ -19,7 +21,8 @@ export class HeaderComponent implements OnInit {
     private userAuthService: UserAuthService,
     private router: Router,
     public userService: UserService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    public loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {

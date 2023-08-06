@@ -1,13 +1,18 @@
-<mat-sidenav-container class="tp-container">
-  <mat-sidenav mode="side" opened>
-    <!-- <div>
-      <li *ngFor="let brand of productDetails">
-        <ul id="m"></ul>
-      </li>
+<mat-sidenav-container>
+  <mat-sidenav
+    #sidenav
+    [mode]="slide"
+    [opened]="(isHandset | async).matches ? 'false' : 'true'"
+  >
+    <!-- <div *ngFor="let brand of brands">
+      <button align="left" mat-flat-button class="w-100">{{ brand }}</button>
     </div> -->
   </mat-sidenav>
-  <mat-sidenav-content
-    ><div class="container mt-2">
+  <mat-sidenav-content>
+    <div class="container mt-2">
+      <mat-icon *ngIf="isMobScreen | async" (click)="toggleNav(sidenav)"
+        ><i class="bi bi-three-dots-vertical"></i
+      ></mat-icon>
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Search any product</mat-label>
         <input
@@ -20,56 +25,64 @@
         />
         <mat-hint>Search any product</mat-hint>
       </mat-form-field>
-      <mat-grid-list cols="4" rowHeight="3:6" gutterSize="10">
-        <mat-grid-tile *ngFor="let p of productDetails">
-          <div class="row p-6">
-            <div class="image-container">
-              <img
-                class="home-page-product-image"
-                [src]="p.productImages[0].url"
-                alt=""
-                width="200px"
-                height="200px"
-              />
-            </div>
-            <div class="mt-3">
-              <p>
-                <b>{{ p.productName }}</b>
-              </p>
-            </div>
-            <div class="mt-2">
-              <p
-                style="
-                  white-space: inherit;
-                  height: 45px;
-                  width: 200px;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-                "
-              >
-                {{ p.productDescription }}
-              </p>
-            </div>
-            <div class="mt-2">
-              <b>Rs. {{ p.productDiscountedPrice }}</b> &nbsp;
-              <b style="text-decoration: line-through">{{
-                p.productActualPrice
-              }}</b>
-            </div>
-            <div class="mt-2">
-              <button
-                type="button"
-                mat-raised-button
-                color="warn"
-                (click)="showProductDetails(p.productId)"
-              >
-                View Details
-              </button>
+      <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+          <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3">
+            <div class="col" *ngFor="let p of productDetails">
+              <div class="card shadow-sm">
+                <img
+                  [src]="p.productImages[0].url"
+                  class="card-img-top"
+                  alt="{{ p.productName }} {{ ml }}"
+                />
+                <div class="card-body">
+                  <div class="h-25">
+                    <p
+                      class="card-text"
+                      style="
+                        white-space: inherit;
+                        height: 45px;
+                        width: 200px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                      "
+                    >
+                      {{ p.productDescription }}
+                    </p>
+                  </div>
+                  <h6 class="card-title">{{ p.productName | uppercase }}</h6>
+                  <p>
+                    <b>&#8377; {{ p.productDiscountedPrice }}</b> &nbsp;
+                    <b style="text-decoration: line-through"
+                      >&#8377;{{ p.productActualPrice }}</b
+                    >
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <button
+                        type="button"
+                        mat-raised-button
+                        (click)="showProductDetails(p.productId)"
+                      >
+                        View Details
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </mat-grid-tile>
-      </mat-grid-list>
-
+        </div>
+      </div>
+      <mat-paginator
+        [length]="pageNumber"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="[4, 8, 12]"
+        (page)="nextPage($event)"
+      >
+      </mat-paginator>
       <div
         class="text-center mt-5"
         style="padding-bottom: 100px"

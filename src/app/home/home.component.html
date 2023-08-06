@@ -1,72 +1,86 @@
-<div>Some tags before</div>
-<owl-carousel-o [options]="customOptions">
-  <ng-container *ngFor="let slide of slides">
-    <ng-template carouselSlide [id]="slide.id">
-      <img [src]="slide.img" />
-    </ng-template>
-  </ng-container>
-</owl-carousel-o>
-<div>Some tags after</div>
-<div class="container mt-5 w-100 h-100">
+<div class="container-fluid mt-2">
+  <owl-carousel-o [options]="customOptions">
+    <ng-container *ngFor="let slide of slides">
+      <ng-template carouselSlide [id]="slide.id">
+        <img style="height: 100%" [src]="slide.img" />
+      </ng-template>
+    </ng-container>
+  </owl-carousel-o>
+</div>
+<div class="container">
   <mat-tab-group dynamicHeight mat-align-tabs="center">
-    <mat-tab routerLink="men" label="First"
+    <mat-tab [routerLinkActive]="'active'" label="Best Seller"
       ><app-bestseller></app-bestseller
     ></mat-tab>
-    <mat-tab label="Second"></mat-tab>
+    <mat-tab [routerLinkActive]="'active'" label="Trending Perfume"
+      ><app-trendperfume></app-trendperfume
+    ></mat-tab>
   </mat-tab-group>
 </div>
-<div class="main-container">
-  <h3>Our Brands</h3>
-  <div class="carousel-container">
-    <carousel
-      [loop]="true"
-      [width]="carouselSize"
-      [images]="image"
-      [arrowsOutside]="true"
-      [arrowsTheme]="'dark'"
-      [cellsToShow]="cells"
-      [cellWidth]="CarouselWidth"
-      [height]="carouselheight"
-      [margin]="carouselMargin"
-      [autoplay]="true"
-      [transitionDuration]="500"
-      [autoplayInterval]="3000"
-      [arrows]="false"
-      [transitionTimingFunction]="'ease-out'"
-    >
-    </carousel>
-  </div>
+<div class="text-center">
+  <h3 style="font-family: 'Cinzel', serif; font-size: 40px">Our Brands</h3>
+</div>
+<div class="carousel-container">
+  <carousel
+    [loop]="true"
+    [width]="carouselSize"
+    [images]="image"
+    [arrowsOutside]="true"
+    [arrowsTheme]="'dark'"
+    [cellsToShow]="cells"
+    [cellWidth]="CarouselWidth"
+    [height]="carouselheight"
+    [margin]="carouselMargin"
+    [autoplay]="true"
+    [transitionDuration]="500"
+    [autoplayInterval]="3000"
+    [arrows]="false"
+    [transitionTimingFunction]="'ease-out'"
+  >
+  </carousel>
+</div>
 
-  <div class="foot-container">
-    <div class="foot-image">
-      <img src="../../assets/images/men-perfume.jpg" alt="" />
-      <div class="foot-text">
-        <p>
-          Perfume For<br />
-          Men
-        </p>
-        <button routerLink="men" class="btn btn-1">shop now</button>
-      </div>
+<div class="image-container">
+  <div
+    class="image"
+    data-aos="fade-right"
+    data-aos-offset="500"
+    data-aos-easing="ease-in-sine"
+    data-aos-duration="800"
+  >
+    <img src="../../assets/images/men-perfume.jpg" alt="" />
+    <div class="foot-text">
+      <p>
+        Perfume For<br />
+        Men
+      </p>
+      <button routerLink="men" class="btn btn-1">shop now</button>
     </div>
-    <div class="foot-image">
-      <img src="../../assets/images/women-perfume.jpg" alt="" />
-      <div class="foot-text">
-        <p>
-          Perfume For<br />
-          Women
-        </p>
-        <button class="btn btn-2">shop now</button>
-      </div>
+  </div>
+  <div class="image">
+    <img src="../../assets/images/women-perfume.jpg" alt="" />
+    <div class="foot-text">
+      <p>
+        Perfumes For<br />
+        Women
+      </p>
+      <button class="btn btn-2">shop now</button>
     </div>
-    <div class="foot-image">
-      <img src="../../assets/images/unisex-perfume.jpg" alt="" />
-      <div class="foot-text">
-        <p>
-          Perfume For<br />
-          Unisex
-        </p>
-        <button class="btn btn-3">shop now</button>
-      </div>
+  </div>
+  <div
+    class="image"
+    data-aos="fade-left"
+    data-aos-offset="500"
+    data-aos-easing="ease-in-sine"
+    data-aos-duration="800"
+  >
+    <img src="../../assets/images/unisex-perfume.jpg" alt="" />
+    <div class="foot-text">
+      <p>
+        Perfumes For<br />
+        Unisex
+      </p>
+      <button class="btn btn-3" routerLink="unisex">shop now</button>
     </div>
   </div>
 </div>

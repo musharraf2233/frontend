@@ -5,13 +5,13 @@
 </div> -->
 <mat-sidenav-container class="tp-container">
   <mat-sidenav mode="side" opened>
-    <button routerLink="addNewProduct">
+    <button [routerLinkActive]="'active'" routerLink="addNewProduct">
       Add Product<i class="bi bi-file-plus"></i>
     </button>
-    <button routerLink="showProductDetails">
+    <button [routerLinkActive]="'active'" routerLink="showProductDetails">
       Show Product<i class="bi bi-view-list"></i>
     </button>
-    <button routerLink="orderInformation">
+    <button [routerLinkActive]="'active'" routerLink="orderInformation">
       view Orders<i class="bi bi-info-square"></i>
     </button>
   </mat-sidenav>

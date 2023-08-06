@@ -50,13 +50,30 @@ export class ProductService {
     );
   }
 
-  public getAllProducts(pageNumber, searchKeyword: string = "") {
+  public getAllProducts(pageNumber, pageSize, searchKeyword: string = "") {
     return this.httpClient.get<Product[]>(
       "http://localhost:9090/getAllProducts?pageNumber=" +
         pageNumber +
+        "&pageSize=" +
+        pageSize +
         "&searchKey=" +
         searchKeyword
     );
+  }
+
+  public getProductByName(productName) {
+    return this.httpClient.get<Product[]>(
+      "http://localhost:9090/getProductByName/" + productName
+    );
+  }
+  public getByBestSeller() {
+    return this.httpClient.get<Product[]>(
+      "http://localhost:9090/getByBestSeller"
+    );
+  }
+
+  public getByTrends() {
+    return this.httpClient.get<Product[]>("http://localhost:9090/getByTrends");
   }
 
   public getAllBrands() {
@@ -65,6 +82,7 @@ export class ProductService {
 
   public getAllProductsType(
     pageNumber,
+    pageSize,
     searchKeyword: string = "",
     type: string
   ) {
@@ -73,6 +91,8 @@ export class ProductService {
         type +
         "?pageNumber=" +
         pageNumber +
+        "&pageSize=" +
+        pageSize +
         "&searchKey=" +
         searchKeyword
     );

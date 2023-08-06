@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Courgette&display=swap");
+
+.container-about {
+  height: auto;
+  width: 100%;
+  font-family: "Playfair Display", serif;
+  color: black;
+}
+.about-img {
+  position: relative;
+  opacity: 0.1;
+  margin-left: 0;
+}
+p {
+  font-family: "Alegreya Sans", sans-serif;
+}
+.float-1,
+.float-2 {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.float-1 {
+  background-color: rgba(216, 191, 216, 0.527);
+}
+.float-1-img {
+  width: 100%;
+  max-width: 500px;
+  max-height: 500px;
+  border-radius: 10px;
+}
+.float-1-text {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  width: 700px;
+  text-align: justify;
+  justify-content: center;
+}
+
+.float-1-text h1 {
+  font-size: 100px;
+}
+@media screen and (max-width: 600px) {
+  .float-1-text h1 {
+    font-size: 49px;
+  }
+}
+.float-1-text h2 {
+  font-size: 70px;
+  color: blueviolet;
+  line-height: 80px;
+}
+@media screen and (max-width: 600px) {
+  .float-1-text h2 {
+    font-size: 29px;
+    color: blueviolet;
+    line-height: 35px;
+  }
+}
+.float-1-text p {
+  font-size: 20px;
+  line-height: 30px;
+}
+@media screen and (max-width: 600px) {
+  .float-1-text p {
+    font-size: 15px;
+    line-height: 20px;
+  }
+}
+.slogan p {
+  color: slateblue;
+  font-family: "Courgette", cursive;
+  font-size: 50px;
+}
+@media screen and (max-width: 600px) {
+  .slogan p {
+    color: slateblue;
+    font-family: "Courgette", cursive;
+    font-size: 30px;
+  }
+}
+.float-2-img {
+  width: 100%;
+  max-width: 500px;
+  max-height: 500px;
+  border-radius: 10px;
+}
+.float-2-text {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  width: 700px;
+  text-align: justify;
+  justify-content: center;
+  align-items: end;
+}
+
+.float-2-text h1 {
+  font-size: 100px;
+}
+@media screen and (max-width: 600px) {
+  .float-2-text h1 {
+    font-size: 51px;
+  }
+}
+.float-2-text h2 {
+  font-size: 50px;
+  color: purple;
+  line-height: 60px;
+}
+@media screen and (max-width: 600px) {
+  .float-2-text h2 {
+    font-size: 20px;
+    color: purple;
+    line-height: 30px;
+  }
+}
+.float-2-text p {
+  font-size: 20px;
+  line-height: 30px;
+}
+@media screen and (max-width: 600px) {
+  .float-2-text p {
+    font-size: 15px;
+    line-height: 20px;
+  }
+}

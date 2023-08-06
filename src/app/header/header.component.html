@@ -28,7 +28,7 @@
 <header>
   <mat-toolbar>
     <img
-      src="../../assets/images/top-bar/logo_1x2-150x75.png"
+      src="../../assets/images/top-bar/logo.png"
       alt="logo"
       class="animate__animated animate__fadeInDown"
       style="height: 75px; width: 150px"
@@ -45,7 +45,12 @@
           ></span
         >
         <span
-          ><a [routerLinkActive]="'active'" routerLink="store">Store</a></span
+          ><a
+            [routerLinkActive]="'active'"
+            (click)="getAllProducts()"
+            routerLink="store"
+            >Store</a
+          ></span
         >
         <span
           ><a [routerLinkActive]="'active'" routerLink="men" #unmonitored>
@@ -69,7 +74,10 @@
           ></span
         >
         <span
-          ><a *ngIf="isLoggedIn() && isAdmin()" routerLink="/admin"
+          ><a
+            *ngIf="isLoggedIn() && isAdmin()"
+            [routerLinkActive]="'active'"
+            routerLink="/admin"
             >Admin</a
           ></span
         >
@@ -105,7 +113,12 @@
       ></mat-icon>
     </div>
   </mat-toolbar>
+  <div class="loader-container" *ngIf="loaderService.isLoading | async">
+    <img class="loader-image" src="../../assets/images/bg.jpeg" alt="" />
+    <mat-spinner [diameter]="70" [strokeWidth]="3"></mat-spinner>
+  </div>
 </header>
+
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="over" position="end">
     <button routerLink="" class="btn w-100 mt-2 p-6 side-btn">
@@ -121,7 +134,7 @@
       <i class="bi bi-gender-female"></i> Women
     </button>
   </mat-sidenav>
-  <mat-sidenav-content
-    ><router-outlet (activate)="onActive()"></router-outlet
-  ></mat-sidenav-content>
+  <mat-sidenav-content>
+    <router-outlet (activate)="onActive()"></router-outlet>
+  </mat-sidenav-content>
 </mat-sidenav-container>

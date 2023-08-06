@@ -11,6 +11,7 @@ import {
   Breakpoints,
 } from "@angular/cdk/layout";
 import { Observable, Subject } from "rxjs";
+import { PageEvent } from "@angular/material/paginator";
 
 @Component({
   selector: "app-women",
@@ -19,8 +20,10 @@ import { Observable, Subject } from "rxjs";
 })
 export class WomenComponent implements OnInit, OnDestroy {
   pageNumber: number = 0;
+  pageSize: number = 4;
 
   productDetails = [];
+  brands = [];
 
   showLoadButton = false;
 
@@ -45,6 +48,12 @@ export class WomenComponent implements OnInit, OnDestroy {
   ]);
   isMobScreen: Observable<boolean>;
 
+  nextPage(event: PageEvent) {
+    this.pageNumber = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.productDetails = [];
+    this.getAllProductsType();
+  }
   constructor(
     private productService: ProductService,
     private imageProcessingService: ImageProcessingService,
@@ -75,6 +84,7 @@ export class WomenComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getAllProductsType();
+    this.getAllBrands();
     this.isMobScreen = this.breakpointObserver
       .observe([Breakpoints.Small, Breakpoints.XSmall])
       .pipe(map(({ matches }) => matches));
@@ -95,7 +105,7 @@ export class WomenComponent implements OnInit, OnDestroy {
 
   public getAllProductsType(searchKey: string = "") {
     this.productService
-      .getAllProductsType(this.pageNumber, searchKey, "women")
+      .getAllProductsType(this.pageNumber, this.pageSize, searchKey, "women")
       .pipe(
         map((x: Product[], i) =>
           x.map((product: Product) =>
@@ -106,10 +116,8 @@ export class WomenComponent implements OnInit, OnDestroy {
       .subscribe(
         (resp: Product[]) => {
           console.log(resp);
-          if (resp.length == 12) {
-            this.showLoadButton = true;
-          } else {
-            this.showLoadButton = false;
+          if (resp.length != 0) {
+            this.pageNumber = this.pageNumber + this.pageSize + resp.length;
           }
           resp.forEach((p) => this.productDetails.push(p));
         },
@@ -122,6 +130,17 @@ export class WomenComponent implements OnInit, OnDestroy {
   public loadMoreProduct() {
     this.pageNumber = this.pageNumber + 1;
     this.getAllProductsType();
+  }
+  public getAllBrands() {
+    this.productService.getAllBrands().subscribe(
+      (res: Product[]) => {
+        console.log(res);
+        res.forEach((p) => this.brands.push(p));
+      },
+      (err: HttpErrorResponse) => {
+        console.log(err);
+      }
+    );
   }
 
   showProductDetails(productId) {

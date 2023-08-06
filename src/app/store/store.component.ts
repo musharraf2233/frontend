@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { Product } from "../_model/product.model";
 import { map, takeUntil } from "rxjs/operators";
 import { ProductService } from "../_services/product.service";
@@ -11,6 +11,7 @@ import {
   Breakpoints,
 } from "@angular/cdk/layout";
 import { Observable, Subject } from "rxjs";
+import { PageEvent } from "@angular/material/paginator";
 
 @Component({
   selector: "app-store",
@@ -19,12 +20,17 @@ import { Observable, Subject } from "rxjs";
 })
 export class StoreComponent implements OnInit, OnDestroy {
   pageNumber: number = 0;
+  pageSize: number = 4;
 
   productDetails = [];
 
   brands = [];
 
   pages: Array<number>;
+
+  isBrand: boolean = false;
+
+  imageShow: any;
 
   cols: string;
   slide: string;
@@ -71,12 +77,13 @@ export class StoreComponent implements OnInit, OnDestroy {
           }
         }
       });
+    this.imageShow = 0;
   }
-
-  setPage(i, event: any) {
-    event.preventDefault();
-    this.pages = i;
-    this.getAllProducts;
+  nextPage(event: PageEvent) {
+    this.pageNumber = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.productDetails = [];
+    this.getAllProducts();
   }
 
   isHandset: Observable<BreakpointState> = this.breakpointObserver.observe(
@@ -89,6 +96,7 @@ export class StoreComponent implements OnInit, OnDestroy {
       .observe([Breakpoints.Small, Breakpoints.XSmall])
       .pipe(map(({ matches }) => matches));
   }
+
   toggleNav(nav: any) {
     if (nav.opened) {
       nav.close();
@@ -105,7 +113,7 @@ export class StoreComponent implements OnInit, OnDestroy {
 
   public getAllProducts(searchKey: string = "") {
     this.productService
-      .getAllProducts(this.pageNumber, searchKey)
+      .getAllProducts(this.pageNumber, this.pageSize, searchKey)
       .pipe(
         map((x: Product[], i) =>
           x.map((product: Product) =>
@@ -117,12 +125,10 @@ export class StoreComponent implements OnInit, OnDestroy {
         (resp: Product[]) => {
           console.log(resp);
           console.log(resp.length);
-
-          if (resp.length == 8) {
-            this.showLoadButton = true;
-          } else {
-            this.showLoadButton = false;
+          if (resp.length != 0) {
+            this.pageNumber = this.pageNumber + this.pageSize + resp.length;
           }
+
           resp.forEach((p) => this.productDetails.push(p));
         },
         (error: HttpErrorResponse) => {
@@ -144,13 +150,34 @@ export class StoreComponent implements OnInit, OnDestroy {
     this.productService.getAllBrands().subscribe(
       (res: Product[]) => {
         console.log(res);
-
         res.forEach((p) => this.brands.push(p));
       },
       (err: HttpErrorResponse) => {
         console.log(err);
       }
     );
+  }
+
+  public getProductByName(productName) {
+    this.productService
+      .getProductByName(productName)
+      .pipe(
+        map((x: Product[], i) =>
+          x.map((product: Product) =>
+            this.imageProcessingService.createImages(product)
+          )
+        )
+      )
+      .subscribe(
+        (res: Product[]) => {
+          console.log(res);
+          this.productDetails = [];
+          res.forEach((p) => this.productDetails.push(p));
+        },
+        (err: HttpErrorResponse) => {
+          console.log(err);
+        }
+      );
   }
   ngOnDestroy() {
     this.destroyed.next();

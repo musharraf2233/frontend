@@ -17,6 +17,7 @@ export class AddNewProductComponent implements OnInit {
     { value: "men", viewValue: "men" },
     { value: "women", viewValue: "women" },
     { value: "unisex", viewValue: "unisex" },
+    { value: "skincare", viewValue: "skincare" },
   ];
   isNewProduct = true;
 
@@ -26,7 +27,9 @@ export class AddNewProductComponent implements OnInit {
     type: "",
     ml: 100,
     bestSeller: false,
+    trendProduct: false,
     productDescription: "",
+    productFullDescription: "",
     productDiscountedPrice: 0,
     productActualPrice: 0,
     productImages: [],

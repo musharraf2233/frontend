@@ -6,7 +6,9 @@ export interface Product {
   type: string;
   ml: number;
   bestSeller: boolean;
+  trendProduct: boolean;
   productDescription: string;
+  productFullDescription: string;
   productDiscountedPrice: number;
   productActualPrice: number;
   productImages: FileHandle[];

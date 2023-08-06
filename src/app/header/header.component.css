@@ -42,9 +42,7 @@
   animation-name: example;
   animation-duration: 4s;
 } */
-body {
-  background-color: aqua;
-}
+
 a:link,
 a:visited {
   color: rgb(128, 128, 128);
@@ -69,12 +67,12 @@ a:focus {
   background-color: tomato;
   color: whitesmoke;
 }
-.mat-icon,
-.mat-icon:link {
+.icon > mat-icon,
+.icon > mat-icon:link {
   font-size: xx-large;
   color: rgb(128, 128, 128);
 }
-.mat-icon:hover {
+.icon > mat-icon:hover {
   color: purple;
   background-color: none;
   cursor: pointer;
@@ -87,7 +85,7 @@ a:focus {
   margin: 20px 10px;
   width: 200px;
   height: 100%;
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
 }
 .side-content {
   height: 100vh;
@@ -100,10 +98,19 @@ header {
   width: 100%;
 }
 .mat-drawer-container {
-  margin-top: 5px;
+  margin-top: 4px;
   background-color: white;
+  height: auto;
 }
-
+mat-sidenav-content {
+  background-color: white;
+  height: auto;
+  overflow: none;
+}
+.mat-drawer-content {
+  height: auto;
+  overflow: none;
+}
 mat-sidenav {
   width: 200px;
 }
@@ -118,12 +125,29 @@ mat-sidenav {
 a.active {
   color: purple;
 }
-a > i {
+a > .icon {
   display: flex;
   justify-content: space-between;
 }
-mat-sidenav-container {
-  /* margin-top: 20px; */
-  height: auto;
-  background-color: aqua;
+
+.loader-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.644);
+  /* opacity: 0.8; */
+  z-index: 99;
+}
+.mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: #b53fae;
+}
+.loader-image {
+  position: absolute;
+  width: 130px;
+  height: 130px;
 }

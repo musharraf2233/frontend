@@ -11,6 +11,7 @@ import {
   Breakpoints,
 } from "@angular/cdk/layout";
 import { Observable, Subject } from "rxjs";
+import { PageEvent } from "@angular/material/paginator";
 
 @Component({
   selector: "app-men",
@@ -19,6 +20,7 @@ import { Observable, Subject } from "rxjs";
 })
 export class MenComponent implements OnInit {
   pageNumber: number = 0;
+  pageSize: number = 4;
 
   productDetails = [];
 
@@ -79,6 +81,12 @@ export class MenComponent implements OnInit {
       .observe([Breakpoints.Small, Breakpoints.XSmall])
       .pipe(map(({ matches }) => matches));
   }
+  nextPage(event: PageEvent) {
+    this.pageNumber = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.productDetails = [];
+    this.getAllProductsType();
+  }
   toggleNav(nav: any) {
     if (nav.opened) {
       nav.close();
@@ -95,7 +103,7 @@ export class MenComponent implements OnInit {
 
   public getAllProductsType(searchKey: string = "") {
     this.productService
-      .getAllProductsType(this.pageNumber, searchKey, "men")
+      .getAllProductsType(this.pageNumber, this.pageSize, searchKey, "men")
       .pipe(
         map((x: Product[], i) =>
           x.map((product: Product) =>
@@ -106,10 +114,8 @@ export class MenComponent implements OnInit {
       .subscribe(
         (resp: Product[]) => {
           console.log(resp);
-          if (resp.length == 12) {
-            this.showLoadButton = true;
-          } else {
-            this.showLoadButton = false;
+          if (resp.length != 0) {
+            this.pageNumber = this.pageNumber + this.pageSize + resp.length;
           }
           resp.forEach((p) => this.productDetails.push(p));
         },

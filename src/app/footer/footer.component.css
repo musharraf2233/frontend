@@ -7,7 +7,7 @@ footer {
   align-items: flex-start;
 }
 .foot-container {
-  width: max-content;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;

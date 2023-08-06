@@ -2,14 +2,15 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 @import "animate.css";
-
+@import "aos/dist/aos.css";
 html,
 body {
-  height: 100%;
+  height: auto;
+  min-height: 100vh;
   width: 100%;
 }
 body {
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  background-color: rgb(226, 190, 226);
 }

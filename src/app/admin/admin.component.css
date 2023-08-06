@@ -18,26 +18,16 @@ button {
   align-items: center;
   height: 50px;
   border-style: solid;
-  border-width: 1px 1px;
-  border-color: antiquewhite;
+  border-width: 0;
+  border-bottom-width: 1px;
+  border-color: aliceblue;
   width: 100%;
 }
-button::before {
-  content: " ";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 50px;
-  background-color: purple;
-  transition: 0.5s ease-in-out;
-}
 
-mat-sidenav span a {
-  text-decoration: none;
-  font-size: large;
-  color: black;
-}
 i {
   font-size: larger;
+}
+.active {
+  border-width: 0 5px 0 0;
+  border-color: purple;
 }

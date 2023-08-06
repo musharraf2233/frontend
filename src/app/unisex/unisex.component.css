@@ -1,0 +1,54 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@500&display=swap");
+.mat-grid-tile {
+  width: 300px;
+  display: flex;
+  position: absolute;
+}
+.row {
+  margin: 0;
+  padding: 0;
+  width: fit-content;
+}
+.image-container {
+  padding: 0;
+  width: 250px;
+}
+img {
+  width: 100%;
+  height: auto;
+}
+.container {
+  max-width: 100%;
+}
+body {
+  background-color: aqua;
+}
+
+mat-sidenav-container {
+  height: auto;
+  background-color: aqua;
+}
+mat-sidenav {
+  width: 250px;
+}
+mat-sidenav button {
+  font-family: "Dosis", sans-serif;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+mat-sidenav span a {
+  text-decoration: none;
+  font-size: large;
+  color: black;
+}
+.btn-group > button {
+  background-color: purple;
+  color: whitesmoke;
+}
+.card {
+  background-color: rgb(233, 208, 228);
+}

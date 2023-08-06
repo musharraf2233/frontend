@@ -31,6 +31,7 @@ const routes: Routes = [
     component: AdminComponent,
     canActivate: [AuthGuard],
     data: { roles: ["Admin"] },
+
     children: [
       {
         path: "addNewProduct",
@@ -53,11 +54,6 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: { roles: ["Admin"] },
       },
-      {
-        path: "productViewDetails",
-        component: ProductViewDetailsComponent,
-        resolve: { product: ProductResolveService },
-      },
     ],
   },
   {
@@ -72,6 +68,7 @@ const routes: Routes = [
     path: "productViewDetails",
     component: ProductViewDetailsComponent,
     resolve: { product: ProductResolveService },
+    // outlet: "view",
   },
   {
     path: "buyProduct",

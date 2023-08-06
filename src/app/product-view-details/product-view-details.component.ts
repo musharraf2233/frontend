@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Product } from "../_model/product.model";
 import { ProductService } from "../_services/product.service";
+import { last } from "rxjs/operators";
 
 @Component({
   selector: "app-product-view-details",
@@ -35,7 +36,7 @@ export class ProductViewDetailsComponent implements OnInit {
     );
   }
 
-  changeIndex(index) {
+  changeIndex(index = 1) {
     this.selectedProductIndex = index;
   }
 

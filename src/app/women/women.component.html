@@ -4,9 +4,16 @@
     [mode]="slide"
     [opened]="(isHandset | async).matches ? 'false' : 'true'"
   >
-    <!-- <div *ngFor="let brand of brands">
-      <button align="left" mat-flat-button class="w-100">{{ brand }}</button>
-    </div> -->
+    <div *ngFor="let brand of brands">
+      <button
+        align="left"
+        mat-flat-button
+        class="w-100"
+        (click)="getProductByName(brand)"
+      >
+        {{ brand }}
+      </button>
+    </div>
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="container mt-2">
@@ -79,11 +86,14 @@
         <div class="container">
           <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3">
             <div class="col" *ngFor="let p of productDetails">
-              <div class="card shadow-sm">
+              <div
+                class="card shadow-sm"
+                style="min-height: 207.5px; min-width: 207.5px"
+              >
                 <img
                   [src]="p.productImages[0].url"
                   class="card-img-top"
-                  alt="{{ p.productName }} {{ ml }}"
+                  alt="{{ p.productName }} {{ p.ml }}"
                 />
                 <div class="card-body">
                   <div class="h-25">
@@ -126,19 +136,13 @@
           </div>
         </div>
       </div>
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-          </li>
-        </ul>
-      </nav>
+      <mat-paginator
+        [length]="pageNumber"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="[4, 8, 12]"
+        (page)="nextPage($event)"
+      >
+      </mat-paginator>
       <div
         class="text-center mt-5"
         style="padding-bottom: 100px"

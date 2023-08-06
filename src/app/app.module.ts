@@ -1,5 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { InterceptorService } from "./interceptor.service";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -40,7 +41,11 @@ import { FooterComponent } from "./footer/footer.component";
 import { IvyCarouselModule } from "angular-responsive-carousel";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { StoreComponent } from "./store/store.component";
-import { NgbModule, NgbCarouselModule } from "@ng-bootstrap/ng-bootstrap";
+import {
+  NgbModule,
+  NgbCarouselModule,
+  NgbPaginationModule,
+} from "@ng-bootstrap/ng-bootstrap";
 import { MatSelectModule } from "@angular/material/select";
 import { MenComponent } from "./men/men.component";
 import { WomenComponent } from "./women/women.component";
@@ -53,6 +58,10 @@ import { SkincareComponent } from "./skincare/skincare.component";
 import { MatTabsModule } from "@angular/material/tabs";
 import { BestsellerComponent } from "./bestseller/bestseller.component";
 import { CarouselModule } from "ngx-owl-carousel-o";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { TrendperfumeComponent } from "./trendperfume/trendperfume.component";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -82,6 +91,7 @@ import { CarouselModule } from "ngx-owl-carousel-o";
     UnisexComponent,
     SkincareComponent,
     BestsellerComponent,
+    TrendperfumeComponent,
   ],
   imports: [
     BrowserModule,
@@ -109,6 +119,10 @@ import { CarouselModule } from "ngx-owl-carousel-o";
     MatMenuModule,
     MatTabsModule,
     CarouselModule,
+    MatSlideToggleModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
+    NgbPaginationModule,
   ],
   providers: [
     AuthGuard,
@@ -118,6 +132,11 @@ import { CarouselModule } from "ngx-owl-carousel-o";
       multi: true,
     },
     UserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true,
+    },
   ],
   entryComponents: [ShowProductImagesDialogComponent],
   bootstrap: [AppComponent, HomeComponent],

@@ -27,6 +27,7 @@ export class ShowProductDetailsComponent implements OnInit {
     "Actions",
   ];
 
+  isChecked: boolean;
   constructor(
     private productService: ProductService,
     public imagesDialog: MatDialog,

@@ -98,7 +98,7 @@ export class BestsellerComponent implements OnInit {
 
   public getAllProducts(searchKey: string = "") {
     this.productService
-      .getAllProducts(this.pageNumber, searchKey)
+      .getByBestSeller()
       .pipe(
         map((x: Product[], i) =>
           x.map((product: Product) =>

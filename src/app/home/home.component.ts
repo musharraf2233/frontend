@@ -19,6 +19,8 @@ import {
 import { Observable, Subject, observable } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { OwlOptions } from "ngx-owl-carousel-o";
+import { Title } from "@angular/platform-browser";
+import AOS from "aos";
 
 @Component({
   selector: "app-home",
@@ -56,6 +58,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private imageProcessingService: ImageProcessingService,
     private router: Router,
+    private title: Title,
     private breakpointObserver: BreakpointObserver
   ) {
     breakpointObserver
@@ -109,6 +112,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    AOS.init();
     this.getAllProducts();
     this.isWideScreen = this.breakpointObserver
       .observe(Breakpoints.Medium)
@@ -173,30 +177,28 @@ export class HomeComponent implements OnInit, OnDestroy {
   ];
 
   slides = [
-    { id: 1, img: "../../assets/images/carousel/2.jpg" },
-    { id: 2, img: "../../assets/images/carousel/1.jpg" },
-    { id: 3, img: "../../assets/images/carousel/2.jpg" },
-    { id: 4, img: "../../assets/images/carousel/1.jpg" },
-    { id: 5, img: "../../assets/images/carousel/2.jpg" },
-    { id: 6, img: "../../assets/images/carousel/1.jpg" },
-    { id: 6, img: "../../assets/images/carousel/2.jpg" },
+    { id: 1, img: "../../assets/images/carousel/2.jpg", route: "/women" },
+    { id: 2, img: "../../assets/images/carousel/1.jpg", route: "/men" },
+    { id: 3, img: "../../assets/images/carousel/3.jpg", route: "/women" },
+    { id: 4, img: "../../assets/images/carousel/1.jpg", route: "/men" },
+    { id: 5, img: "../../assets/images/carousel/2.jpg", route: "/women" },
+    { id: 6, img: "../../assets/images/carousel/1.jpg", route: "/men" },
   ];
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: false,
-    touchDrag: true,
+    touchDrag: false,
     pullDrag: false,
-    dots: false,
+    dots: true,
     navSpeed: 1000,
-    stagePadding: 50,
     autoplay: true,
     autoplayTimeout: 8000,
     autoplayHoverPause: true,
     animateOut: "animate__animated animate__fadeOut",
     animateIn: "animate__animated animate__fadeIn",
     navText: [
-      '<i class="bi bi-caret-left-fill"></i>',
-      '<i class="bi bi-caret-right-fill"></i>',
+      '<i class="bi bi-chevron-left"></i>',
+      '<i class="bi bi-chevron-right"></i>',
     ],
     responsive: {
       0: {
